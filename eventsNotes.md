@@ -33,6 +33,7 @@ https://www.tutorialsteacher.com/csharp/csharp-event
 -   the delegate defines the signature for the event handler method of the subscriber class
 -   an event handler signature must match in both the publisher and subscriber class
 -   when an event is triggered, a response is sent from the publisher to the subscriber classes, at which point the designated event handlers in the subscriber classes handle events as needed
+-   a publisher "delegates" events, while a subscriber "consumes" events
 
 # how do you declare an event?
 -   to declare an event, you use the following format:
@@ -40,8 +41,24 @@ https://www.tutorialsteacher.com/csharp/csharp-event
 -   the class containing the declared event is the publisher
 
 # how do you raise an event?
+-   to raise an event, you will want to invoke the event in a separate method within the publishing class. The method here serves as a wrapper to determine if the event should be invoked or not.
+-   you can invoke an event by calling the "Invoke" method on your event reference variable.
 -   to raise an event, declare the event(the event handler) in another class with the same signature as the initial event.
--   typically, you will want to define the
+-   you will normally want to define this wrapper method with the protected and virtual modifiers so subscriber classes can redefine this method to handle the event as needed for their case.
+-   in the case of a derived/child class, you will want to make sure that the base class onEvent method is called to ensure that the registered delegates receive the event
+
+# how does a subscriber register an event?
+-   A subscriber registers an event by creating a method with a matching signature to the original event
+-   The subscriber will instantiate a new instance of the publisher class, and then use += operator to assign the event to a new event  method (the event handler)
+
+# built-in event delegate types for event HANDLERS (not declarations)
+-   .NET framework BCLs include delegate types EventHandler and EventHandler<T> for most common event handling
+-   use EventHandler for any events that do not include event data
+    - `public delegate void EventHandler(object sender, EventArgs e);`
+- if an event uses event data, use the EventHandler<T> delegate
+    - `public delegate void EventHandler<TEventArgs>(object sender, TEventArgs e);`
+
+
 
 # Start on passing an Event Data
 
