@@ -72,6 +72,5 @@ https://www.tutorialsteacher.com/csharp/csharp-event
 
 
 
-# Start on passing an Event Data
 
 
