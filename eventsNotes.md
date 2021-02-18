@@ -45,7 +45,7 @@ https://www.tutorialsteacher.com/csharp/csharp-event
 -   you can invoke an event by calling the "Invoke" method on your event reference variable.
 -   to raise an event, declare the event(the event handler) in another class with the same signature as the initial event.
 -   you will normally want to define this wrapper method with the protected and virtual modifiers so subscriber classes can redefine this method to handle the event as needed for their case.
--   in the case of a derived/child class, you will want to make sure that the base class onEvent method is called to ensure that the registered delegates receive the event
+-   in the case of a derived/child class, you will want to make sure that the base class OnEvent method is called to ensure that the registered delegates receive the event
 
 # how does a subscriber register an event?
 -   A subscriber registers an event by creating a method with a matching signature to the original event
@@ -57,6 +57,18 @@ https://www.tutorialsteacher.com/csharp/csharp-event
     - `public delegate void EventHandler(object sender, EventArgs e);`
 - if an event uses event data, use the EventHandler<T> delegate
     - `public delegate void EventHandler<TEventArgs>(object sender, TEventArgs e);`
+-   these built-in events are also built-in delegates, meaning a custom delegate does not need to be defined if either of these options meet your programming expectations.
+
+
+# passing an event data
+-   .NET includes many built-in event data classes. All event data classes end with "EventArgs" - example: SerialDataReceivedEventArgs.
+-   using the EventHandler<TEventArgs> delegate, you can pass a single type to the event for subscribers to manipulate
+-   If you want to pass multiple types to subscribers, you will want to write a custom EventArgs class which contains fields and properties related to the passed data.
+    - example: let's say you want to keep track of a user uploading a file to your system. When the user attempts upload, you might have a business logic related method that keeps track of a successful file upload.
+        - You might be keeping track of the file upload date, file type, submission form, success of upload, etc.) all within the event properties and backing fields
+        - When that event fires, some of this information could be presented to the user based on the processed business logic, and the invocation of the onEvent method.
+        - By using an event in this method, you can communicate this data to many different classes rather than working through the data in a more convoluted way. Example: some of the data might be sent to the end user UI to notify of successful upload, upload date, etc. while a separate class which manages a different database connection may receive the data to keep track of as well.
+        - In general, this should make data manipulation more scalable.
 
 
 
