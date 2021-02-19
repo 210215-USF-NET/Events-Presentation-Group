@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Event_Built_in_Delegates</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <StartupObject>Event_Built_in_Delegates.Subscriber</StartupObject>
+  </PropertyGroup>
+
+</Project>

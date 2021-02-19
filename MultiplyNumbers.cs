@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Event
+namespace Event_Built_in_Delegates
 {
     public class MultiplyNumbers
     {
-        public delegate void d_OddNumber(); //Decalred Delegate
-        public event d_OddNumber e_OddNumber; //Declared Event
+        public event EventHandler<OddNumberEventArgs> e_OddNumber;
 
         public void Multiply()
         {
@@ -18,9 +18,9 @@ namespace Event
             Console.WriteLine(answer.ToString());
 
             //Check if answer is an odd number, then raise event
-            if((answer % 2 != 0) && (e_OddNumber != null))
+            if ((answer % 2 != 0) && (e_OddNumber != null))
             {
-                e_OddNumber(); //Raised Event
+                e_OddNumber(this, new OddNumberEventArgs(answer)); //Raised Event
             }
         }
     }
